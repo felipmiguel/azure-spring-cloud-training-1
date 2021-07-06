@@ -13,7 +13,24 @@ Hystrix-Turbine also deployed to get hystrix dashboard.
 ## How to deploy
 This environment is deployed in two steps:
 * Deploy Azure Spring Cloud infrastructure: There is a terraform script in terraform folder.
-* Deploy Java applications: deployapps.sh script builds and deploy the java applications using azure cli.
+```sh
+cd terraform
+terraform init
+terraform apply
+```
+You can provide the parameters by creating a tfvars file.
+```terraform
+asc_rg               = "springcloudresourcegroup"
+asc_service_name     = "asclab"
+config_repo_uri      = "<a git repo>"
+config_repo_username = "<git user name>"
+config_repo_pat      = "<personal access token>"
+```
+* Deploy Java applications: [deployapps.sh](./deployapps.sh) script builds and deploy the java applications using azure cli. Update this script to match the parameters of the terraform deployment:
+```bash
+RESOURCE_GROUP=<put your resource group>
+SPRING_CLOUD_SERVICE=<put your spring cloud service>
+```
 ## What is deployed
 * Azure Spring Cloud service with following apps:
     * [simple-microservice](https://github.com/microsoft/azure-spring-cloud-training/tree/master/02-build-a-simple-spring-boot-microservice)

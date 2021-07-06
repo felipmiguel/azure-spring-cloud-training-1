@@ -1,7 +1,7 @@
 ./mvnw clean package -DskipTests
 
-RESOURCE_GROUP=springcloudlab
-SPRING_CLOUD_SERVICE=asclabfmiguel2
+RESOURCE_GROUP=<put your resource group>
+SPRING_CLOUD_SERVICE=<put your spring cloud service>
 az configure --defaults \
     group=${RESOURCE_GROUP} \
     spring-cloud=${SPRING_CLOUD_SERVICE}
