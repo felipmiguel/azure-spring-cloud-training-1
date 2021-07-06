@@ -1,4 +1,4 @@
-mvn clean package -DskipTests
+./mvnw clean package -DskipTests
 
 RESOURCE_GROUP=springcloudlab
 SPRING_CLOUD_SERVICE=asclabfmiguel2

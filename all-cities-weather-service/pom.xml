@@ -64,35 +64,8 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>com.microsoft.azure</groupId>
-				<artifactId>azure-spring-cloud-maven-plugin</artifactId>
-				<version>1.6.0</version>
-			    <configuration>
-			        <subscriptionId>98bc5d13-2aa1-45cb-bf49-45aa47e220bf</subscriptionId>
-			        <clusterName>asclabfmiguel2</clusterName>
-			        <appName>all-cities-weather-service</appName>
-			        <isPublic>false</isPublic>
-					<auth>vscode</auth>
-			        <deployment>
-			            <cpu>1</cpu>
-			            <memoryInGB>1</memoryInGB>
-			            <instanceCount>1</instanceCount>
-			            <runtimeVersion>Java 8</runtimeVersion>
-			            <resources>
-			                <resource>
-			                    <filtering/>
-			                    <mergeId/>
-			                    <targetPath/>
-			                    <directory>${project.basedir}/target</directory>
-			                    <includes>
-			                        <include>*.jar</include>
-			                    </includes>
-			                </resource>
-			            </resources>
-			        </deployment>
-			    </configuration>
-			</plugin>
+			
+			
 		</plugins>
 	</build>
 

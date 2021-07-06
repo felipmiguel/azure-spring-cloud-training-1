@@ -2,83 +2,44 @@
 page_type: sample
 languages:
 - java
+- terraform
 ---
 
-# Azure Spring Cloud training
+# Azure Spring Cloud scenario
+This repo is the result of completing the training [azure-spring-cloud-training](https://github.com/microsoft/azure-spring-cloud-training). The purpose of this repo is having a working environment in Azure Spring Cloud to demonstrate its capabilities.
 
-You will find here a full workshop on Azure Spring Cloud, including guides and demos.
+Hystrix-Turbine also deployed to get hystrix dashboard.
 
-This lab is based on a public workshop created by [Julien Dubois](https://twitter.com/juliendubois) and available for free to everyone, under the [MIT license](LICENSE.txt).
+## How to deploy
+This environment is deployed in two steps:
+* Deploy Azure Spring Cloud infrastructure: There is a terraform script in terraform folder.
+* Deploy Java applications: deployapps.sh script builds and deploy the java applications using azure cli.
+## What is deployed
+* Azure Spring Cloud service with following apps:
+    * [simple-microservice](https://github.com/microsoft/azure-spring-cloud-training/tree/master/02-build-a-simple-spring-boot-microservice)
+    * [spring-cloud-microservice](https://github.com/microsoft/azure-spring-cloud-training/tree/master/05-build-a-spring-boot-microservice-using-spring-cloud-features)
+    * [city-service](https://github.com/microsoft/azure-spring-cloud-training/tree/master/06-build-a-reactive-spring-boot-microservice-using-cosmosdb)
+    * [weather-service](https://github.com/microsoft/azure-spring-cloud-training/tree/master/07-build-a-spring-boot-microservice-using-mysql)
+    * [gateway](https://github.com/microsoft/azure-spring-cloud-training/tree/master/08-build-a-spring-cloud-gateway)
+    * [all-cities-weather-service](https://github.com/microsoft/azure-spring-cloud-training/tree/master/12-making-microservices-talk-to-each-other)
+    * [hystrix-turbine](https://docs.microsoft.com/en-us/azure/spring-cloud/tutorial-circuit-breaker#using-public-endpoints)
 
-## What you should expect
+* Application Insights linked to Azure Spring Cloud Service.
+* CosmosDb service binded to app 
+* MySQL database binded to app
+* Configuration linked to git repository
 
-This is not the official documentation but an opinionated training.
+## How to test
+See [azure-spring-cloud-training](https://github.com/microsoft/azure-spring-cloud-training) for each of the scenarios.
+## How to clean-up resources
+You can clean-up the resources by executing:
+```bash
+terraform destroy
+```
+This should be executed in folder _terraform_
 
-It is a hands-on training, and it will use the command line extensively. The idea is to get coding very quickly and play with the platform, from a simple demo to far more complex examples.
-
-After completing all the guides, you should have a fairly good understanding of everything that Azure Spring Cloud offers.
-
-## Symbols
-
->🛑 -  __Manual Modification Required__. When this symbol appears in front of one or more commands, you will need to modify the commands as indicated prior to running them.
-
->🚧 - __Preview-specific__. This symbol indicates steps that are only necessary while Azure Spring Cloud is in preview.
-
->💡 - __Frustration Avoidance Tip__. These will help you avoid potential pitfalls.
-
-## [00 - Prerequisites and Setup](00-setup-your-environment/README.md)
-
-Prerequisites and environment setup.
-
-## [01 - Create an Azure Spring Cloud cluster](01-create-an-azure-spring-cloud-instance/README.md)
-
-Basics on creating a cluster and configuring the CLI to work efficiently.
-
-## [02 - Build a simple Spring Boot microservice](02-build-a-simple-spring-boot-microservice/README.md)
-
-Build the simplest possible Spring Boot microservice using the Spring Initializer.
-
-## [03 - Configure application logs](03-configure-monitoring/README.md)
-
-Access Spring Boot applications logs to understand common issues.
-
-## [04 - Configure a Spring Cloud Config server](04-configure-a-spring-cloud-config-server/README.md)
-
-Configure a [Spring Cloud Config Server](https://cloud.spring.io/spring-cloud-config), that will be entirely managed and supported by Azure Spring Cloud, to be used by Spring Boot microservices.
-
-## [05 - Build a Spring Boot microservice using Spring Cloud features](05-build-a-spring-boot-microservice-using-spring-cloud-features/README.md)
-
-Build a Spring Boot microservice that is cloud-enabled: it uses a Spring Cloud Service Registry and a [Spring Cloud Config Server](https://cloud.spring.io/spring-cloud-config) which are both managed and supported by Azure Spring Cloud.
-
-## [06 - Build a reactive Spring Boot microservice using Cosmos DB](06-build-a-reactive-spring-boot-microservice-using-cosmosdb/README.md)
-
-Build a reactive Spring Boot microservice, that uses the [Spring reactive stack](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html) and is bound to a [Cosmos DB database](https://docs.microsoft.com/en-us/azure/cosmos-db/?WT.mc_id=azurespringcloud-github-judubois) in order to access a globally-distributed database with optimum performance.
-
-## [07 - Build a Spring Boot microservice using MySQL](07-build-a-spring-boot-microservice-using-mysql/README.md)
-
-Build a classical Spring Boot application that uses JPA to access a [MySQL database managed by Azure](https://docs.microsoft.com/en-us/azure/mysql/?WT.mc_id=azurespringcloud-github-judubois).
-
-## [08 - Build a Spring Cloud Gateway](08-build-a-spring-cloud-gateway/README.md)
-
-Build a [Spring Cloud Gateway](https://spring.io/projects/spring-cloud-gateway) to route HTTP requests to the correct Spring Boot microservices.
-
-## [09 - Putting it all together, a complete microservice stack](09-putting-it-all-together-a-complete-microservice-stack/README.md)
-
-Use a front-end to access graphically our complete microservice stack. Monitor our services with Azure Spring Cloud's distributed tracing mechanism and scale our services depending on our needs.
-
-## [10 - Blue/Green deployment](10-blue-green-deployment/README.md)
-
-Deploy new versions of applications in a staging environment and switch between staging and production with Azure Spring Cloud.
-
-## [11 - Configure CI/CD](11-configure-ci-cd/README.md)
-
-Configure a Continuous Integration / Continuous Deployment platform using GitHub Actions, so our Spring Boot microservices are automatically deployed.
-
-## [12 - Making Microservices Talk to Each Other](12-making-microservices-talk-to-each-other/README.md)
-
-Creating a microservice that talks to other microservices.
-
-## [Conclusion](99-conclusion/README.md)
+## Requirements
+Terraform, Azure cli and Java 8/11 or above.
 
 ---
 
