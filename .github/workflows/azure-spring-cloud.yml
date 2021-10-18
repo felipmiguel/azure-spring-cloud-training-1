@@ -2,7 +2,7 @@ name: Build and deploy to Azure Spring Cloud
 
 on:
   push:
-    branches: xstof
+    branches: master
 
 jobs:
   build-and-deploy:
