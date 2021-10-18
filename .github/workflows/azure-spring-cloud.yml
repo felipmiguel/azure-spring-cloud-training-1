@@ -14,14 +14,32 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      working-directory: ./solutionfolder/weather-service
+      working-directory: ./gateway
       run: mvn package -DskipTests
-    - name: Login to Azure Spring Cloud
-      uses: azure/login@v1
+    - name: Create Draft Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-    - name: Install Azure Spring Cloud extension
-      run: az extension add -y --name spring-cloud
-    - name: Deploy to Azure Spring Cloud
-      run: az spring-cloud app deploy --resource-group tutorial-asc --service gitteasc --name weather-service --jar-path target/demo-0.0.1-SNAPSHOT.jar
-      working-directory: ./solutionfolder/weather-service
+        tag_name: ${{ env.version }}
+        release_name: gateway${{ env.version }}
+        draft: true
+        prerelease: false
+       
+    
+        
+    - uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: gateway/target/gateway-0.0.1-SNAPSHOT.jar
+        asset_name: 'gateway${{ env.version }}.jar'
+        asset_content_type: application/jar
+
+    - uses: eregon/publish-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        release_id: ${{ steps.create_release.outputs.id }}
