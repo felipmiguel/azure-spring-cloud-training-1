@@ -1,7 +1,7 @@
 name: Build and release Spring Cloud gateway
 
 env:
-  version: V0
+  version: V1
   
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      working-directory: ./gateway
+      # working-directory: .
       run: mvn package -DskipTests
     - name: Create Draft Release
       id: create_release
@@ -38,7 +38,15 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: gateway/target/gateway-0.0.1-SNAPSHOT.jar
-        asset_name: 'gateway${{ env.version }}.jar'
+        asset_name: 'gateway.jar'
+        asset_content_type: application/jar
+    - uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: spring-cloud-microservice/target/spring-cloud-microservice-0.0.1-SNAPSHOT.jar
+        asset_name: 'spring-cloud-microservice.jar'
         asset_content_type: application/jar
 
     - uses: eregon/publish-release@v1
